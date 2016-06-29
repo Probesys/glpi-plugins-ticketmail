@@ -230,7 +230,7 @@ class PluginTicketmailProfile extends CommonDBTM {
 
 }
 function plugin_ticketmail_haveRight() {
-	if ($_SESSION['glpi_plugin_ticketmail_profile']['show_ticketmail_onglet'] == "1") {
+	if ( array_key_exists('glpi_plugin_ticketmail_profile', $_SESSION) && $_SESSION['glpi_plugin_ticketmail_profile']['show_ticketmail_onglet'] == "1") {
 		return true;
 	}
 	else {
