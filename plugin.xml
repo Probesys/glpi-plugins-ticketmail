@@ -1,0 +1,49 @@
+<root>
+   <name>TicketMail</name>
+   <key>ticketmail</key>
+   <state>stable</state>
+   <logo>https://forge.indepnet.net/attachments/740/logo.png</logo>
+   <description>
+      <short>
+         <fr><![CDATA[Ce plugin permet d'envoyer les informations d'un ticket à une personne par mail.]]></fr>
+         <en><![CDATA[This plugin allows users to send ticket information by email.]]></en>
+      </short>
+      <long>
+         <fr><![CDATA[Ce plugin permet d'envoyer les informations de suivi et tâches d'un ticket à une personne par mail depuis un onglet affiché dans la page descriptive d'un ticket. Pour plus d'infos, consulter le wiki du plugin.]]></fr>
+         <en><![CDATA[This plugin allows you to send ticket's followups and tasks informations by email, from a tab page displayed in the ticket description. For more information, visit the plugin's wiki.]]></en>
+      </long>
+   </description>
+   <homepage>https://github.com/Probesys/glpi-plugins-ticketmail</homepage>
+   <download>https://github.com/Probesys/glpi-plugins-ticketmail/releases</download>
+   <issues>https://github.com/Probesys/glpi-plugins-ticketmail/issues</issues>
+   <readme>https://github.com/Probesys/glpi-plugins-ticketmail/README.md</readme>
+
+   <authors>
+      <author>Cyril ZORMAN, Philippe GODOT, Maxime BONILLO</author>
+   </authors>
+   <versions>
+	<version>
+          <num>3.2.0</num>
+          <compatibility>0.90</compatibility>
+    	</version>
+   </versions>
+   <langs>
+      <lang>fr_FR</lang>
+      <lang>de_DE</lang>
+      <lang>en_GB</lang>
+      <lang>es_ES</lang>
+      <lang>pt_BR</lang>
+   </langs>
+   <license><![CDATA[GPL v2+]]></license>
+   <tags>
+         <fr>
+            <tag>Helpdesk</tag>
+            <tag>Internet</tag>
+         </fr>
+         <en>
+            <tag>Helpdesk</tag>
+            <tag>Internet</tag>
+         </en>
+   </tags>
+</root>
+

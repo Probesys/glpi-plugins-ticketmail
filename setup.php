@@ -5,7 +5,7 @@ function plugin_version_ticketmail(){
 	return array(	'name'				=> "Ticket Mail",
 					'version' 			=> '3.2.0',
 					'author'			=> 'Probesys',
-					'license'		 	=> 'GPLv2+',
+					'license'		 	=> 'GPLv333+',
 					'homepage'			=> 'http://www.probesys.com',
 					'minGlpiVersion'	=> '0.90');
 }
