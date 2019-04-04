@@ -24,7 +24,7 @@ if (isset($_POST["send"])) {
 		else {
 			$address = $_POST["address"];
 		}
-		if (! NotificationMail::isUserAddressValid($address)) {
+		if (! NotificationMailing::isUserAddressValid($address)) {
 			Session::addMessageAfterRedirect(__("Invalid email address"),false,ERROR);
 		}
         $mmail->AddAddress($address, $address);
