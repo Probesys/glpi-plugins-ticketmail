@@ -1,73 +1,72 @@
 <?php
 
-class PluginTicketmailProfile extends CommonDBTM {
+class PluginTicketmailProfile extends CommonDBTM
+{
+    public static function getTypeName($nb=0)
+    {
+        return "Ticket Mail";
+    }
 
-	static function getTypeName($nb=0) {
-		return "Ticket Mail";
-	}
-
-	static function canCreate() {
-
-		if (isset($_SESSION["glpi_plugin_ticketmail_profile"])) {
-			return ($_SESSION["glpi_plugin_ticketmail_profile"]['ticketmail'] == 'w');
-		}
+    public static function canCreate()
+    {
+        if (isset($_SESSION["glpi_plugin_ticketmail_profile"])) {
+            return ($_SESSION["glpi_plugin_ticketmail_profile"]['ticketmail'] == 'w');
+        }
         return false;
-	}
+    }
 
-	static function canView() {
-
-		if (isset($_SESSION["glpi_plugin_ticketmail_profile"])) {
+    public static function canView()
+    {
+        if (isset($_SESSION["glpi_plugin_ticketmail_profile"])) {
             return ($_SESSION["glpi_plugin_ticketmail_profile"]['ticketmail'] == 'w'
             || $_SESSION["glpi_plugin_ticketmail_profile"]['ticketmail'] == 'r');
         }
-		return false;
-	}
+        return false;
+    }
 
-	static function createAdminAccess($ID) {
-
-		$myProfil = new self();
-		if (!$myProfil->getFromDB($ID)) {
-			$myProfil->add(array(	'id'                       	=> $ID,
-					     			'show_ticketmail_onglet' 	=> '1'));
+    public static function createAdminAccess($ID)
+    {
+        $myProfil = new self();
+        if (!$myProfil->getFromDB($ID)) {
+            $myProfil->add(array(	'id'                       	=> $ID,
+                                     'show_ticketmail_onglet' 	=> '1'));
         }
-	}
+    }
 
-	function createAccess($ID) {
+    public function createAccess($ID)
+    {
+        $this->add(array('id' => $ID));
+    }
 
-		$this->add(array('id' => $ID));
-	}
+    public static function changeProfile()
+    {
+        $profil = new self();
+        if ($profil->getFromDB($_SESSION['glpiactiveprofile']['id'])) {
+            $_SESSION["glpi_plugin_ticketmail_profile"]=$profil->fields;
+        } else {
+            unset($_SESSION["glpi_plugin_ticketmail_profile"]);
+        }
+    }
 
-	static function changeProfile() {
+    //profiles modification
+    public function showForm($ID, $options=array())
+    {
+        global $LANG;
 
-      $profil = new self();
-		if ($profil->getFromDB($_SESSION['glpiactiveprofile']['id'])) {
-			$_SESSION["glpi_plugin_ticketmail_profile"]=$profil->fields;
-		}
-		else {
-			unset($_SESSION["glpi_plugin_ticketmail_profile"]);
-		}
-	}
+        $target = $this->getFormURL();
+        if (isset($options['target'])) {
+            $target = $options['target'];
+        }
 
-	//profiles modification
-	function showForm ($ID, $options=array()) {
+        /*if (!Session::haveRight("profile","r")) {
+            return false;
+        }*/
 
-		global $LANG;
-
-		$target = $this->getFormURL();
-		if (isset($options['target'])) {
-			$target = $options['target'];
-		}
-
-		/*if (!Session::haveRight("profile","r")) {
-			return false;
-		}*/
-
-		$profil = new Profile();
-		if ($ID) {
-			$this->getFromDB($ID);
-			$profil->getFromDB($ID);
-		}
-		?>
+        $profil = new Profile();
+        if ($ID) {
+            $this->getFromDB($ID);
+            $profil->getFromDB($ID);
+        } ?>
 		<form action='<?php echo $target ?>' method='post'>
 			<table class='tab_cadre_fixe'>
 				<tr>
@@ -88,66 +87,65 @@ class PluginTicketmailProfile extends CommonDBTM {
 			</table>
 
 		<?php
-		Html::closeForm();
-	}
+        Html::closeForm();
+    }
 
-	function getTabNameForItem(CommonGLPI $item, $withtemplate=0) {
+    public function getTabNameForItem(CommonGLPI $item, $withtemplate=0)
+    {
+        global $LANG;
 
-		global $LANG;
+        if ($item->getType() == 'Profile' || $item->getType() == 'Ticket') {
+            if (plugin_ticketmail_haveRight()) {
+                return $LANG['plugin_ticketmail']['6'];
+            }
+        }
+        return '';
+    }
 
-		if ($item->getType() == 'Profile' || $item->getType() == 'Ticket') {
-			if (plugin_ticketmail_haveRight()) {
-				return $LANG['plugin_ticketmail']['6'];
-			}
-		}
-		return '';
-	}
+    public static function displayTabContentForItem(CommonGLPI $item, $tabnum=1, $withtemplate=0)
+    {
+        global $CFG_GLPI, $DB;
+        global $LANG;
 
-	static function displayTabContentForItem(CommonGLPI $item, $tabnum=1, $withtemplate=0) {
-		global $CFG_GLPI, $DB;
-  		global $LANG;
-
-		if ($item->getType() == 'Profile') {
-			$profil = new self();
-			$ID = $item->getField('id');
-			if (!$profil->GetfromDB($ID)) {
-				$profil->createAccess($ID);
-			}
-			$profil->showForm($ID);
-		}
-		else if ($item->getType() == 'Ticket' && plugin_ticketmail_haveRight()) {
-			$ID = $item->getField('id');
-			?>
+        if ($item->getType() == 'Profile') {
+            $profil = new self();
+            $ID = $item->getField('id');
+            if (!$profil->GetfromDB($ID)) {
+                $profil->createAccess($ID);
+            }
+            $profil->showForm($ID);
+        } elseif ($item->getType() == 'Ticket' && plugin_ticketmail_haveRight()) {
+            $ID = $item->getField('id'); ?>
 			<div align='center'>
 			<?php
-			// Initialise les libellés :
-			$title = "Send";
-			$but_label = $LANG['plugin_ticketmail']['5'];
-			$but_name = "send";
-			$to = "To ";
-			$subject = "";
-			$body = "";
+            // Initialise les libellés :
+            $title = "Send";
+            $but_label = $LANG['plugin_ticketmail']['5'];
+            $but_name = "send";
+            $to = "To ";
+            $subject = "";
+            $body = "";
 
-			$query = "SELECT name, date, content FROM glpi_tickets WHERE id=".$ID;
+            $query = "SELECT name, date, content FROM glpi_tickets WHERE id=".$ID;
 
-			if ($result = $DB->query($query)){
-				if ($DB->numrows($result) > 0) {
-					$row = $DB->fetch_assoc($result);
-					$subject = $row['name'];
-					$body = Html::convDateTime($row['date'])."\n".$row['content']."\n\n";
-				}
-			}
-			$query = "SELECT date, content FROM glpi_tickettasks WHERE tickets_id=".$ID." UNION SELECT date, content FROM glpi_ticketfollowups WHERE tickets_id=".$ID." ORDER BY 1";
-			if ($result = $DB->query($query)){
-				if ($DB->numrows($result) > 0) {
-					while ($row = $DB->fetch_assoc($result)){
-						$body .= Html::convDateTime($row['date'])."\n".$row['content']."\n\n";
-					}
-				}
-			}
+            if ($result = $DB->query($query)) {
+                if ($DB->numrows($result) > 0) {
+                    $row = $DB->fetch_assoc($result);
+                    $subject = $row['name'];
+                    $body = Html::convDateTime($row['date'])."\n".$row['content']."\n\n";
+                }
+            }
+            $query = "SELECT date, content FROM glpi_tickettasks WHERE tickets_id=".$ID." UNION SELECT date, content FROM glpi_ticketfollowups WHERE tickets_id=".$ID." ORDER BY 1";
+            if ($result = $DB->query($query)) {
+                if ($DB->numrows($result) > 0) {
+                    while ($row = $DB->fetch_assoc($result)) {
+                        $body .= Html::convDateTime($row['date'])."\n".$row['content']."\n\n";
+                    }
+                }
+            }
 
-			//Hide textbox for known user
-			$onchange = '
+            //Hide textbox for known user
+            $onchange = '
 			if (this.value != 0) {
 			document.getElementById("address").style.display="none";
 			document.getElementById("address").value=this.value;
@@ -159,8 +157,7 @@ class PluginTicketmailProfile extends CommonDBTM {
 			';
 
 
-			// Affichage du formulaire :
-			?>
+            // Affichage du formulaire : ?>
 			<form method='post' action="<?php echo $CFG_GLPI["root_doc"] . "/plugins/ticketmail/front/ticketmail.form.php"; ?>" >
 
 			<input type='hidden' name='id' value='<?php echo $ID; ?>'>
@@ -172,13 +169,12 @@ class PluginTicketmailProfile extends CommonDBTM {
 						<td><?php echo $LANG['plugin_ticketmail']['2']; ?> : </td>
 						<td>
 						<?php
-						User::dropdown(array(	'name'   	=> 'users_id_ticketmail',
-												'comments'	=> false,
-												'value'  	=> 'users_id_ticketmail',
-					                            'entity' 	=> $_SESSION["glpiactive_entity"],
-			        		                    'right'  	=> array('ticket'),
-			        		                    'on_change'	=> $onchange));
-						?>
+                        User::dropdown(array(	'name'   	=> 'users_id_ticketmail',
+                                                'comments'	=> false,
+                                                'value'  	=> 'users_id_ticketmail',
+                                                'entity' 	=> $_SESSION["glpiactive_entity"],
+                                                'right'  	=> array('ticket'),
+                                                'on_change'	=> $onchange)); ?>
 						<input type='text' name='address' id='address' size='40'></td>
 					</tr>
 					<tr class='tab_bg_1'>
@@ -202,39 +198,39 @@ class PluginTicketmailProfile extends CommonDBTM {
 			<?php Html::closeForm(); ?>
 				</div>
 		<?php
-		}
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	//TODO
-/*
-	static function getName($userid) {
-		$query = "SELECT name FROM glpi_users WHERE id=".$userid;
+    //TODO
+    /*
+        static function getName($userid) {
+            $query = "SELECT name FROM glpi_users WHERE id=".$userid;
+    
+        }
+    */
+    public static function getEmail($userid)
+    {
+        if (!UserEmail::getDefaultForUser($userid)) {
+            return '';
+        }
+        return UserEmail::getDefaultForUser($userid);
+    }
 
-	}
-*/
-	static function getEmail($userid) {
-
-		if (!UserEmail::getDefaultForUser($userid)) {
-			return '';
-		}
-		return UserEmail::getDefaultForUser($userid);
-	}
-
-	static function getHistoryEntry($data) {
-				$tmp = array();
-				$tmp['change'] = sprintf(__("An email was sent to %s"), $data['old_value']) . " : " . $data['new_value'];
-				return $tmp['change'];
-	}
-
+    public static function getHistoryEntry($data)
+    {
+        $tmp = array();
+        $tmp['change'] = sprintf(__("An email was sent to %s"), $data['old_value']) . " : " . $data['new_value'];
+        return $tmp['change'];
+    }
 }
-function plugin_ticketmail_haveRight() {
-	if ( isset($_SESSION["glpi_plugin_ticketmail_profile"]) && $_SESSION['glpi_plugin_ticketmail_profile']['show_ticketmail_onglet'] == "1") {
-		return true;
-	}
-	else {
-		return false;
-	}
+function plugin_ticketmail_haveRight()
+{
+    if (isset($_SESSION["glpi_plugin_ticketmail_profile"]) && $_SESSION['glpi_plugin_ticketmail_profile']['show_ticketmail_onglet'] == "1") {
+        return true;
+    } else {
+        return false;
+    }
 }
 ?>

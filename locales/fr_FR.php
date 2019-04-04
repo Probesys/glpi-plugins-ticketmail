@@ -10,4 +10,3 @@ $LANG['plugin_ticketmail']['6']="Ticket-mail";
 // profile
 $LANG['plugin_ticketmail']['profile'][0] = "Gestion des droits";
 $LANG['plugin_ticketmail']['profile'][1] = "Affichage de l'onglet";
-?>

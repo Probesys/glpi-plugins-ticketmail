@@ -10,4 +10,3 @@ $LANG['plugin_ticketmail']['6']="Ticket-mail";
 // profile
 $LANG['plugin_ticketmail']['profile'][0] = "Rechte-Management";
 $LANG['plugin_ticketmail']['profile'][1] = "Registerkarte anzeigen";
-?>

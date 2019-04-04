@@ -10,4 +10,3 @@ $LANG['plugin_ticketmail']['6']="Enviar por email";
 // profile
 $LANG['plugin_ticketmail']['profile'][0] = "Gestión de derechos";
 $LANG['plugin_ticketmail']['profile'][1] = "Mostrando incidencia";
-?>
