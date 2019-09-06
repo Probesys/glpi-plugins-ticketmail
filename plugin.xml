@@ -19,7 +19,10 @@
    <readme>https://github.com/Probesys/glpi-plugins-ticketmail/README.md</readme>
 
    <authors>
-      <author>Cyril ZORMAN, Philippe GODOT, Maxime BONILLO</author>
+	   <author>PROBESYS</author>
+	   <author>Cyril ZORMAN</author>
+	   <author>Philippe GODOT</author>
+	   <author>Maxime BONILLO</author>
    </authors>
    <versions>
 	<version>
