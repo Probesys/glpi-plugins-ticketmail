@@ -19,16 +19,20 @@
    <readme>https://github.com/Probesys/glpi-plugins-ticketmail/README.md</readme>
 
    <authors>
-	   <author>PROBESYS</author>
-	   <author>Cyril ZORMAN</author>
-	   <author>Philippe GODOT</author>
-	   <author>Maxime BONILLO</author>
+      <author>PROBESYS</author>
+      <author>Cyril ZORMAN</author>
+      <author>Philippe GODOT</author>
+      <author>Maxime BONILLO</author>
    </authors>
    <versions>
-	<version>
-          <num>3.2.0</num>
-          <compatibility>0.90</compatibility>
-    	</version>
+      <version>
+         <num>3.2.0</num>
+         <compatibility>0.90</compatibility>
+      </version>
+      <version>
+         <num>3.3.0</num>
+         <compatibility>9.4</compatibility>
+      </version>
    </versions>
    <langs>
       <lang>fr_FR</lang>
@@ -39,14 +43,14 @@
    </langs>
    <license><![CDATA[GPL v2+]]></license>
    <tags>
-         <fr>
-            <tag>Helpdesk</tag>
-            <tag>Internet</tag>
-         </fr>
-         <en>
-            <tag>Helpdesk</tag>
-            <tag>Internet</tag>
-         </en>
+      <fr>
+         <tag>Helpdesk</tag>
+         <tag>Internet</tag>
+      </fr>
+      <en>
+         <tag>Helpdesk</tag>
+         <tag>Internet</tag>
+      </en>
    </tags>
 </root>
 
