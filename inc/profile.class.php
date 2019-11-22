@@ -161,7 +161,7 @@ class PluginTicketmailProfile extends CommonDBTM
 			<form method='post' action="<?php echo $CFG_GLPI["root_doc"] . "/plugins/ticketmail/front/ticketmail.form.php"; ?>" >
 
 			<input type='hidden' name='id' value='<?php echo $ID; ?>'>
-				<table class='tab_cadre' style='margin: 0; margin-top: 5px;'>
+				<table class='tab_cadre-fix' style='margin: 0; margin-top: 5px;'>
 					<tr>
 						<th colspan='2'><?php echo $LANG['plugin_ticketmail']['1']; ?></th>
 					</tr>
@@ -175,7 +175,7 @@ class PluginTicketmailProfile extends CommonDBTM
                                                 'entity' 	=> $_SESSION["glpiactive_entity"],
                                                 'right'  	=> array('ticket'),
                                                 'on_change'	=> $onchange)); ?>
-						<input type='text' name='address' id='address' size='40'></td>
+						<input type='text'  name='address' id='address' size='40'></td>
 					</tr>
 					<tr class='tab_bg_1'>
 						<td><?php echo $LANG['plugin_ticketmail']['3']; ?> : </td>
@@ -186,7 +186,7 @@ class PluginTicketmailProfile extends CommonDBTM
 					<tr class='tab_bg_1'>
 						<td><?php echo $LANG['plugin_ticketmail']['4']; ?> : </td>
 						<td>
-							<textarea name='body' rows='25' cols='100'><?php echo $body; ?></textarea>
+							<textarea name='body' id='ticketMailBody' rows='25' cols='100'><?php echo $body; ?></textarea>
 						</td>
 					</tr>
 					<tr class='tab_bg_2'>
@@ -197,6 +197,24 @@ class PluginTicketmailProfile extends CommonDBTM
 				</table>
 			<?php Html::closeForm(); ?>
 				</div>
+                    <script>
+                    tinymce.init({
+                        language: 'fr_FR',
+                        invalid_elements: 'form,iframe,script,@[onclick|ondblclick|'
+                        + 'onmousedown|onmouseup|onmouseover|onmousemove|onmouseout|onkeypress|'
+                        + 'onkeydown|onkeyup]',
+                        browser_spellcheck: true,
+                        mode: 'exact',
+                        selector: '#ticketMailBody',
+                        relative_urls: false,
+                        remove_script_host: false,
+                        entity_encoding: 'raw',
+                        paste_data_images: $('.fileupload').length,
+                        menubar: false,
+                        statusbar: false
+                    });
+                    </script>
+                   
 		<?php
         }
 

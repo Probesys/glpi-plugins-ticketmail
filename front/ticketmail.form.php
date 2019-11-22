@@ -3,7 +3,7 @@
 include("../../../inc/includes.php");
 
 if (isset($_POST["send"])) {
-    $mmail=new GLPIMailer();
+    $mmail = new GLPIMailer();
         
     $query = "SELECT email, realname, firstname FROM glpi_useremails um
                 LEFT JOIN glpi_users u ON um.users_id=u.id
@@ -16,7 +16,7 @@ if (isset($_POST["send"])) {
         }
     }
 
-    $body= str_replace("\\r", "", str_replace("\\n", "\n", $_POST['body']));
+    $body = str_replace("\\r", "", str_replace("\\n", "\n", $_POST['body']));
 
     if ($_POST['users_id_ticketmail']) {
         $address = PluginTicketmailProfile::getEmail($_POST['users_id_ticketmail']);
@@ -26,13 +26,16 @@ if (isset($_POST["send"])) {
     if (! NotificationMailing::isUserAddressValid($address)) {
         Session::addMessageAfterRedirect(__("Invalid email address"), false, ERROR);
     }
+    $subject = $_POST["subject"];
     $mmail->AddAddress($address, $address);
-    $mmail->Subject=$_POST["subject"];
-    $mmail->Body=$body;
+    $mmail->isHTML(true);
+    $mmail->Subject = $subject;
+    $mmail->Body = $body;
     $mmail->MessageID = "GLPI-ticketmail".time().".".rand(). "@".php_uname('n');
-
+    
     if (!$mmail->Send()) {
         Session::addMessageAfterRedirect(__("Your email could not be processed.\nIf the problem persists, contact the administrator"), false, ERROR);
+        Toolbox::logInFile("mail", "\nError during send email form ticketMail plugin:\n ** RECIPIANT: ".$address. "\n ** SUBJECT: ".$subject."\n ** BODY: ".$body. "\n ** ERROR: ".$mmail->ErrorInfo);
     } else {
         Toolbox::logInFile("mail", sprintf(
                     __('%1$s: %2$s'),
@@ -40,11 +43,11 @@ if (isset($_POST["send"])) {
                     __('An email was sent to %s'),
                     $address
                 ),
-                    $_POST["subject"]."\n"
+                    $subject."\n"
                 ));
         $changes[0] = 0;
         $changes[1] = $address;
-        $changes[2] = $_POST['subject'];
+        $changes[2] = $subject;
         Log::history($_POST['id'], 'Ticket', $changes, 'PluginTicketmailProfile', Log::HISTORY_PLUGIN + 1024);
         Session::addMessageAfterRedirect(sprintf(__('An email was sent to %s'), $address));
     }

@@ -1,21 +1,24 @@
 <?php
+const min_glpi_version = 9.2;
 
 function plugin_version_ticketmail()
 {
-    return array(	'name'				=> "Ticket Mail",
-                    'version' 			=> '3.2.0',
-                    'author'			=> 'Probesys',
-                    'license'		 	=> 'GPLv333+',
-                    'homepage'			=> 'http://www.probesys.com',
-                    'minGlpiVersion'	=> '0.90');
+    return [	
+      'name'		=> "Ticket Mail",
+      'version'		=> '3.3.0',
+      'author'		=> 'Probesys',
+      'license'	 	=> 'GPLv3+',
+      'homepage'	=> 'http://www.probesys.com',
+      'minGlpiVersion'	=> min_glpi_version
+      ];
 }
 
 function plugin_ticketmail_check_prerequisites()
 {
-    if (GLPI_VERSION>=0.84) {
+    if (GLPI_VERSION>=min_glpi_version) {
         return true;
     } else {
-        echo "GLPI version not compatible need 0.90";
+        echo "GLPI version not compatible need ".min_glpi_version;
     }
 }
 

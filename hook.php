@@ -7,7 +7,7 @@ function plugin_ticketmail_install()
     $migration = new Migration(100);
 
     //Fresh install
-    if (!TableExists('glpi_plugin_ticketmail_profiles')) {
+    if (!$DB->tableExists('glpi_plugin_ticketmail_profiles')) {
         $query = "CREATE TABLE `glpi_plugin_ticketmail_profiles` (
 					`id` int(11) NOT NULL default '0' COMMENT 'RELATION to glpi_profiles (id)',
 					`show_ticketmail_onglet` char(1) collate utf8_unicode_ci default NULL,
@@ -23,7 +23,7 @@ function plugin_ticketmail_install()
     //Update
     else {
         // Since v0.84 remove "profiles_id" column and use "id"
-        if (FieldExists('glpi_plugin_ticketmail_profiles', 'profiles_id')) {
+        if ($DB->fieldExists('glpi_plugin_ticketmail_profiles', 'profiles_id')) {
             $drop_column_query = "ALTER TABLE glpi_plugin_ticketmail_profiles DROP COLUMN `id`;";
             $rename_column_query = "ALTER TABLE glpi_plugin_ticketmail_profiles
 									CHANGE profiles_id id int(11) NOT NULL default '0'
