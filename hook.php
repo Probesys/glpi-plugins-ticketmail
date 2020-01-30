@@ -12,7 +12,7 @@ function plugin_ticketmail_install()
 					`id` int(11) NOT NULL default '0' COMMENT 'RELATION to glpi_profiles (id)',
 					`show_ticketmail_onglet` char(1) collate utf8_unicode_ci default NULL,
 					PRIMARY KEY  (`id`)
-				  ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+				  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
         $DB->queryOrDie($query, $DB->error());
 
         $migration->executeMigration();
