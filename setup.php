@@ -1,25 +1,43 @@
 <?php
-const min_glpi_version = 9.2;
 
+define('TICKETMAIL_VERSION', '3.4.0');
+define('MIN_GLPI_VERSION', '9.4');
+define('MAX_GLPI_VERSION', '9.6');
 function plugin_version_ticketmail()
 {
     return [	
       'name'		=> "Ticket Mail",
-      'version'		=> '3.3.0',
-      'author'		=> 'Probesys',
+      'version'		=> TICKETMAIL_VERSION,
+      'author'          => '<a href="http://www.probesys.com">Probesys</a>',
       'license'	 	=> 'GPLv3+',
-      'homepage'	=> 'http://www.probesys.com',
-      'minGlpiVersion'	=> min_glpi_version
-      ];
+      'homepage'	=> 'https://github.com/Probesys/glpi-plugins-vip',
+      'requirements'    => [
+         'glpi'   => [
+            'min' => MIN_GLPI_VERSION,
+            'max' => MAX_GLPI_VERSION,
+         ],
+         'php'    => [
+            'min' => '7.0'
+         ] 
+        ]
+    ];
 }
 
 function plugin_ticketmail_check_prerequisites()
 {
-    if (GLPI_VERSION>=min_glpi_version) {
-        return true;
-    } else {
-        echo "GLPI version not compatible need ".min_glpi_version;
-    }
+    $prerequisites_check_ok = false;
+
+   try {
+      if (version_compare(GLPI_VERSION, MIN_GLPI_VERSION, '<')) {
+          throw new Exception('This plugin requires GLPI >= ' . MIN_GLPI_VERSION);
+      }
+
+      $prerequisites_check_ok = true;
+   } catch (Exception $e) {
+       echo $e->getMessage();
+   }
+
+    return $prerequisites_check_ok;
 }
 
 function plugin_ticketmail_check_config($verbose=false)

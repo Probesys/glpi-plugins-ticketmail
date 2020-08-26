@@ -3,6 +3,16 @@
 include("../../../inc/includes.php");
 
 if (isset($_POST["send"])) {
+    
+    $header = "<!DOCTYPE html PUBLIC
+                        'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+                        <html>
+                        <head>
+                         <META http-equiv='Content-Type' content='text/html; charset='utf-8'>
+                         </head>
+                         <body>";
+    $footer = "</body></html>";
+    
     $mmail = new GLPIMailer();
         
     $query = "SELECT email, realname, firstname FROM glpi_useremails um
@@ -16,7 +26,7 @@ if (isset($_POST["send"])) {
         }
     }
 
-    $body = str_replace("\\r", "", str_replace("\\n", "\n", $_POST['body']));
+    $body = str_replace("\\r", "", str_replace("\\n", "\n", html_entity_decode($_POST['body'])));
 
     if ($_POST['users_id_ticketmail']) {
         $address = PluginTicketmailProfile::getEmail($_POST['users_id_ticketmail']);
@@ -26,11 +36,12 @@ if (isset($_POST["send"])) {
     if (! NotificationMailing::isUserAddressValid($address)) {
         Session::addMessageAfterRedirect(__("Invalid email address"), false, ERROR);
     }
+    
     $subject = $_POST["subject"];
     $mmail->AddAddress($address, $address);
     $mmail->isHTML(true);
     $mmail->Subject = $subject;
-    $mmail->Body = $body;
+    $mmail->Body = $header.GLPIMailer::normalizeBreaks($body).$footer;
     $mmail->MessageID = "GLPI-ticketmail".time().".".rand(). "@".php_uname('n');
     
     if (!$mmail->Send()) {

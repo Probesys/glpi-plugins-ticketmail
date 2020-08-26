@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the plugin_ticketmail package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid   ""
+msgstr  "Project-Id-Version: plugin_ticketmail 3.4.0\n"
+        "Report-Msgid-Bugs-To: contact@probesys.com\n"
+        "POT-Creation-Date: 2020-08-26 15:35+0200\n"
+        "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+        "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+        "Language-Team: LANGUAGE <LL@li.org>\n"
+        "Language: \n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=CHARSET\n"
+        "Content-Transfer-Encoding: 8bit\n"
+
+#: inc/profile.class.php:67
+msgctxt "ticketmail"
+msgid   "User rights management"
+msgstr  ""
+
+#: inc/profile.class.php:70
+msgctxt "ticketmail"
+msgid   "Tab display"
+msgstr  ""
+
+#: inc/profile.class.php:91
+msgctxt "ticketmail"
+msgid   "Ticket-mail"
+msgstr  ""
+
+#: inc/profile.class.php:115
+msgctxt "ticketmail"
+msgid   "Send"
+msgstr  ""
+
+#: inc/profile.class.php:127
+msgctxt "ticketmail"
+msgid   "Content of the initial ticket"
+msgstr  ""
+
+#: inc/profile.class.php:135
+msgctxt "ticketmail"
+msgid   "Ticket tasks and followups associate to the ticket"
+msgstr  ""
+
+#: inc/profile.class.php:164
+msgctxt "ticketmail"
+msgid   "Send ticket information by email"
+msgstr  ""
+
+#: inc/profile.class.php:167
+msgctxt "ticketmail"
+msgid   "To"
+msgstr  ""
+
+#: inc/profile.class.php:180
+msgctxt "ticketmail"
+msgid   "Subject"
+msgstr  ""
+
+#: inc/profile.class.php:186
+msgctxt "ticketmail"
+msgid   "Message"
+msgstr  ""
