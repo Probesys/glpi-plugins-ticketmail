@@ -33,6 +33,10 @@
          <num>3.3.0</num>
          <compatibility>9.4</compatibility>
       </version>
+      <version>
+         <num>3.4.0</num>
+         <compatibility>9.5</compatibility>
+      </version>
    </versions>
    <langs>
       <lang>fr_FR</lang>
