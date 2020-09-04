@@ -155,7 +155,7 @@ class PluginTicketmailProfile extends CommonDBTM {
 
                // Affichage du formulaire : 
                ?>
-                  <form method='post' action="<?php echo $CFG_GLPI["root_doc"] . "/plugins/ticketmail/front/ticketmail.form.php"; ?>" >
+                  <form method='post' action="<?php echo PLUGIN_TICKETMAIL_WEB_DIR . "/front/ticketmail.form.php"; ?>" >
                      <div class="spaced" id="tabsbody">
                      <input type='hidden' name='id' value='<?php echo $ID; ?>'>
                      <table class='tab_cadre_fixe' style='margin: 0; margin-top: 5px;'>

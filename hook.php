@@ -17,7 +17,7 @@ function plugin_ticketmail_install()
 
         $migration->executeMigration();
 
-        include_once(GLPI_ROOT."/plugins/ticketmail/inc/profile.class.php");
+        include_once(PLUGIN_TICKETMAIL_DIR."/inc/profile.class.php");
         PluginTicketmailProfile::createAdminAccess($_SESSION['glpiactiveprofile']['id']);
     }
     //Update
