@@ -129,13 +129,14 @@ class PluginTicketmailProfile extends CommonDBTM {
                    }
                }
                // tickettasks and itilfollowups
-               $query = "SELECT date, content FROM glpi_tickettasks WHERE tickets_id=" . $ID . " ORDER BY date DESC"
-                       . "UNION SELECT date, content FROM glpi_itilfollowups WHERE itemtype='Ticket' AND items_id=" . $ID . " ORDER BY date DESC";
+               $query = "SELECT date, content FROM glpi_tickettasks WHERE tickets_id=" . $ID 
+                       . " UNION SELECT date, content FROM glpi_itilfollowups WHERE itemtype='Ticket' AND items_id=" . $ID 
+                       . " ORDER BY date DESC";
                if ($result = $DB->query($query)) {
                    $body .= '<h3>'.__('Ticket tasks and followups associate to the ticket','ticketmail').'</h3>';
                    if ($DB->numrows($result) > 0) {
                        while ($row = $DB->fetch_assoc($result)) {
-                           $body .= Html::convDateTime($row['date']) . "\n" . $row['content'] . "\n\n";
+                           $body .= Html::convDateTime($row['date']) . ":\n" . $row['content'] . "\n\n";
                        }
                    }
                }
