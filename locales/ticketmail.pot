@@ -1,13 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the plugin_ticketmail package.
+# This file is distributed under the same license as the TicketMail package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid   ""
-msgstr  "Project-Id-Version: plugin_ticketmail 3.4.0\n"
+msgstr  "Project-Id-Version: TicketMail 3.4.0RC1\n"
         "Report-Msgid-Bugs-To: contact@probesys.com\n"
-        "POT-Creation-Date: 2020-08-26 15:35+0200\n"
+        "POT-Creation-Date: 2020-09-09 18:07+0200\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,27 +41,27 @@ msgctxt "ticketmail"
 msgid   "Content of the initial ticket"
 msgstr  ""
 
-#: inc/profile.class.php:135
+#: inc/profile.class.php:136
 msgctxt "ticketmail"
 msgid   "Ticket tasks and followups associate to the ticket"
 msgstr  ""
 
-#: inc/profile.class.php:164
+#: inc/profile.class.php:165
 msgctxt "ticketmail"
 msgid   "Send ticket information by email"
 msgstr  ""
 
-#: inc/profile.class.php:167
+#: inc/profile.class.php:168
 msgctxt "ticketmail"
 msgid   "To"
 msgstr  ""
 
-#: inc/profile.class.php:180
+#: inc/profile.class.php:181
 msgctxt "ticketmail"
 msgid   "Subject"
 msgstr  ""
 
-#: inc/profile.class.php:186
+#: inc/profile.class.php:187
 msgctxt "ticketmail"
 msgid   "Message"
 msgstr  ""
