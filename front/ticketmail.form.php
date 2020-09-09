@@ -27,6 +27,7 @@ if (isset($_POST["send"])) {
     }
 
     $body = str_replace("\\r", "", str_replace("\\n", "\n", html_entity_decode($_POST['body'])));
+    $body = str_replace("\'", "'",$body);
 
     if ($_POST['users_id_ticketmail']) {
         $address = PluginTicketmailProfile::getEmail($_POST['users_id_ticketmail']);
