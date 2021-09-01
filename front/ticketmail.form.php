@@ -38,6 +38,10 @@ if (isset($_POST["send"])) {
         Session::addMessageAfterRedirect(__("Invalid email address"), false, ERROR);
     }
     
+    $mmail->AddCustomHeader("Auto-Submitted: auto-generated");
+    // For exchange
+    $mmail->AddCustomHeader("X-Auto-Response-Suppress: OOF, DR, NDR, RN, NRN");
+    $mmail->SetFrom($CFG_GLPI["admin_email"], $CFG_GLPI["admin_email_name"], false);
     $subject = $_POST["subject"];
     $mmail->AddAddress($address, $address);
     $mmail->isHTML(true);
