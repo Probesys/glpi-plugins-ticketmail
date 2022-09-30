@@ -36,10 +36,12 @@ class PluginTicketmailProfile extends CommonDBTM {
 
     public static function changeProfile() {
         $profil = new self();
-        if ($profil->getFromDB($_SESSION['glpiactiveprofile']['id'])) {
+        if (array_key_exists('glpiactiveprofile', $_SESSION) && $profil->getFromDB($_SESSION['glpiactiveprofile']['id'])) {
             $_SESSION["glpi_plugin_ticketmail_profile"] = $profil->fields;
         } else {
-            unset($_SESSION["glpi_plugin_ticketmail_profile"]);
+            if(array_key_exists('glpi_plugin_ticketmail_profile', $_SESSION)) {
+                unset($_SESSION["glpi_plugin_ticketmail_profile"]);
+            }
         }
     }
 
