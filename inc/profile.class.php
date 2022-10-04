@@ -129,14 +129,20 @@ class PluginTicketmailProfile extends CommonDBTM {
                    }
                }
                // tickettasks and itilfollowups
-               $query = "SELECT date, content FROM glpi_tickettasks WHERE tickets_id=" . $ID 
-                       . " UNION SELECT date, content FROM glpi_itilfollowups WHERE itemtype='Ticket' AND items_id=" . $ID 
+               $query = "SELECT date, content, is_private FROM glpi_tickettasks WHERE tickets_id=" . $ID 
+                       . " UNION SELECT date, content, is_private FROM glpi_itilfollowups WHERE itemtype='Ticket' AND items_id=" . $ID 
                        . " ORDER BY date DESC";
                if ($result = $DB->query($query)) {
                    $body .= '<h3>'.__('Ticket tasks and followups associate to the ticket','ticketmail').'</h3>';
                    if ($DB->numrows($result) > 0) {
                        while ($row = $DB->fetch_assoc($result)) {
+                           if($row['is_private'] ==  1) {
+                               $body .= '<div class="is_private">';
+                           }
                            $body .= Html::convDateTime($row['date']) . ":\n" . $row['content'] . "\n\n";
+                           if($row['is_private'] ==  1) {
+                               $body .= '</div>';
+                           }
                        }
                    }
                }
@@ -165,7 +171,7 @@ class PluginTicketmailProfile extends CommonDBTM {
                            <th colspan='2'><?php echo __('Send ticket information by email','ticketmail'); ?></th>
                         </tr>
                         <tr class='tab_bg_1'>
-                           <td><?php echo __('To','ticketmail'); ?> : </td>
+                           <th><?php echo __('To','ticketmail'); ?> : </th>
                            <td>
                             <?php
                             User::dropdown(['name' => 'users_id_ticketmail',
@@ -178,13 +184,17 @@ class PluginTicketmailProfile extends CommonDBTM {
                               <br/><input type='text'  name='address' id='address' size='40' required></td>
                         </tr>
                         <tr class='tab_bg_1'>
-                           <td><?php echo __('Subject','ticketmail'); ?> : </td>
+                            <th><?php echo __('Hide private tasks','ticketmail'); ?></th>
+                            <td><input type="checkbox" name="hide_private_task" id="hidePrivateTask" value="1"></td>
+                        </tr>
+                        <tr class='tab_bg_1'>
+                           <th><?php echo __('Subject','ticketmail'); ?> : </th>
                            <td>
                               <input type='text' name='subject' maxlength='78' size='100' value='<?php echo $subject; ?>'>
                            </td>
                         </tr>
                         <tr class='tab_bg_1'>
-                           <td><?php echo __('Message','ticketmail'); ?> : </td>
+                           <th><?php echo __('Message','ticketmail'); ?> : </th>
                            <td>
                               <textarea name='body' id='ticketMailBody' rows='25' cols='100'><?php echo $body; ?></textarea>
                            </td>
@@ -227,6 +237,9 @@ class PluginTicketmailProfile extends CommonDBTM {
                       skin_url: '<?php echo $CFG_GLPI['root_doc']; ?>/css/tiny_mce/skins/light',
                       content_css: '<?php echo $CFG_GLPI['root_doc']; ?>/css/tiny_mce_custom.css'
                    });
+                   $( "#hidePrivateTask" ).on( "click", function() {
+                       $('#ticketMailBody_ifr').contents().find('.is_private').toggle();
+                      });
                </script>
 
             <?php
