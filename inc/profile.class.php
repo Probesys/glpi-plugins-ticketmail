@@ -186,7 +186,7 @@ class PluginTicketmailProfile extends CommonDBTM {
                               <br/><input type='text'  name='address' id='address' size='40' required></td>
                         </tr>
                         <tr class='tab_bg_1'>
-                            <th><?php echo __('Hide private tasks','ticketmail'); ?></th>
+                            <th><?php echo __('Hide private tasks and private followups','ticketmail'); ?></th>
                             <td><input type="checkbox" name="hide_private_task" id="hidePrivateTask" value="1"></td>
                         </tr>
                         <tr class='tab_bg_1'>

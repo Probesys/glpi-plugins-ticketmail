@@ -58,7 +58,7 @@ msgstr  ""
 
 #: inc/profile.class.php:189
 msgctxt "ticketmail"
-msgid   "Hide private tasks"
+msgid   "Hide private tasks and private followups"
 msgstr  ""
 
 #: inc/profile.class.php:193
