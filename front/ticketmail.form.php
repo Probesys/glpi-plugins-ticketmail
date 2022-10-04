@@ -25,9 +25,15 @@ if (isset($_POST["send"])) {
             $mmail->setFrom($row['email'], $row['firstname'].' '.$row['realname']);
         }
     }
-
+    
     $body = str_replace("\\r", "", str_replace("\\n", "\n", html_entity_decode($_POST['body'])));
     $body = str_replace("\'", "'",$body);
+    
+    $hide_private_task = (array_key_exists('hide_private_task',$_POST) && $_POST['hide_private_task']=='1')?true:false;	
+    if($hide_private_task) {
+        $body = str_replace('<div class=\"is_private\" style=\"display: none;\">', 'PRIVATESTART', $body);
+        $body = preg_replace('/PRIVATESTART[\s\S]+?<\/div>/', '', $body);
+    }
 
     if ($_POST['users_id_ticketmail']) {
         $address = PluginTicketmailProfile::getEmail($_POST['users_id_ticketmail']);
