@@ -49,7 +49,7 @@ if (isset($_POST["send"])) {
         Session::addMessageAfterRedirect(__("Your email could not be processed.\nIf the problem persists, contact the administrator"), false, ERROR);
         Toolbox::logInFile("mail", "\nError during send email form ticketMail plugin:\n ** RECIPIANT: ".$address. "\n ** SUBJECT: ".$subject."\n ** BODY: ".$body. "\n ** ERROR: ".$mmail->ErrorInfo);
     } else {
-        Toolbox::logInFile("mail", sprintf(
+        Toolbox::logInFile("mail", '[plugin ticketmail] : '.sprintf(
                     __('%1$s: %2$s'),
                     sprintf(
                     __('An email was sent to %s'),
