@@ -1,6 +1,6 @@
 <?php
 
-define('TICKETMAIL_VERSION', '3.4.0');
+define('TICKETMAIL_VERSION', '3.5.0');
 define('TICKETMAIL_MIN_GLPI_VERSION', '9.4');
 define('TICKETMAIL_MAX_GLPI_VERSION', '9.6');
 if (!defined("PLUGIN_TICKETMAIL_DIR")) {

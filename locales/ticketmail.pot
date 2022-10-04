@@ -5,9 +5,9 @@
 #
 #, fuzzy
 msgid   ""
-msgstr  "Project-Id-Version: TicketMail 3.4.0RC1\n"
+msgstr  "Project-Id-Version: TicketMail 3.5.0\n"
         "Report-Msgid-Bugs-To: contact@probesys.com\n"
-        "POT-Creation-Date: 2020-09-09 18:07+0200\n"
+        "POT-Creation-Date: 2022-10-04 17:45+0200\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,52 +16,57 @@ msgstr  "Project-Id-Version: TicketMail 3.4.0RC1\n"
         "Content-Type: text/plain; charset=CHARSET\n"
         "Content-Transfer-Encoding: 8bit\n"
 
-#: inc/profile.class.php:67
+#: inc/profile.class.php:69
 msgctxt "ticketmail"
 msgid   "User rights management"
 msgstr  ""
 
-#: inc/profile.class.php:70
+#: inc/profile.class.php:72
 msgctxt "ticketmail"
 msgid   "Tab display"
 msgstr  ""
 
-#: inc/profile.class.php:91
+#: inc/profile.class.php:93
 msgctxt "ticketmail"
 msgid   "Ticket-mail"
 msgstr  ""
 
-#: inc/profile.class.php:115
+#: inc/profile.class.php:117
 msgctxt "ticketmail"
 msgid   "Send"
 msgstr  ""
 
-#: inc/profile.class.php:127
+#: inc/profile.class.php:129
 msgctxt "ticketmail"
 msgid   "Content of the initial ticket"
 msgstr  ""
 
-#: inc/profile.class.php:136
+#: inc/profile.class.php:138
 msgctxt "ticketmail"
 msgid   "Ticket tasks and followups associate to the ticket"
 msgstr  ""
 
-#: inc/profile.class.php:165
+#: inc/profile.class.php:173
 msgctxt "ticketmail"
 msgid   "Send ticket information by email"
 msgstr  ""
 
-#: inc/profile.class.php:168
+#: inc/profile.class.php:176
 msgctxt "ticketmail"
 msgid   "To"
 msgstr  ""
 
-#: inc/profile.class.php:181
+#: inc/profile.class.php:189
+msgctxt "ticketmail"
+msgid   "Hide private tasks"
+msgstr  ""
+
+#: inc/profile.class.php:193
 msgctxt "ticketmail"
 msgid   "Subject"
 msgstr  ""
 
-#: inc/profile.class.php:187
+#: inc/profile.class.php:199
 msgctxt "ticketmail"
 msgid   "Message"
 msgstr  ""
