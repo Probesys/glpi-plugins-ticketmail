@@ -1,11 +1,10 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the TicketMail package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# TicketMail default translation file
+# Copyright (C) 2015-2022
+# This file is distributed under the same license as the plugin_ticketmail package.
 #
 #, fuzzy
 msgid   ""
-msgstr  "Project-Id-Version: TicketMail 3.5.0\n"
+msgstr  "Project-Id-Version: TicketMail\n"
         "Report-Msgid-Bugs-To: contact@probesys.com\n"
         "POT-Creation-Date: 2022-10-04 17:45+0200\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
