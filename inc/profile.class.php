@@ -124,7 +124,7 @@ class PluginTicketmailProfile extends CommonDBTM {
 
                if ($result = $DB->query($query)) {
                    if ($DB->numrows($result) > 0) {
-                       $row = $DB->fetch_assoc($result);
+                       $row = $DB->fetchAssoc($result);
                        $subject = $row['name'];
                        $body = '<h3>'.__('Content of the initial ticket','ticketmail').'</h3>';
                        $body .= Html::convDateTime($row['date']) . "\n" . $row['content'] . "\n\n";
@@ -137,7 +137,7 @@ class PluginTicketmailProfile extends CommonDBTM {
                if ($result = $DB->query($query)) {
                    $body .= '<h3>'.__('Ticket tasks and followups associate to the ticket','ticketmail').'</h3>';
                    if ($DB->numrows($result) > 0) {
-                       while ($row = $DB->fetch_assoc($result)) {
+                       while ($row = $DB->fetchAssoc($result)) {
                            if($row['is_private'] ==  1) {
                                $body .= '<div class="is_private">';
                            }
