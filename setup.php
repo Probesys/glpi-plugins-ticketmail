@@ -2,7 +2,7 @@
 
 define('TICKETMAIL_VERSION', '3.5.0');
 define('TICKETMAIL_MIN_GLPI_VERSION', '9.4');
-define('TICKETMAIL_MAX_GLPI_VERSION', '9.6');
+define('TICKETMAIL_MAX_GLPI_VERSION', '11.0');
 if (!defined("PLUGIN_TICKETMAIL_DIR")) {
    define("PLUGIN_TICKETMAIL_DIR", Plugin::getPhpDir("ticketmail"));
 }

@@ -21,7 +21,7 @@ if (isset($_POST["send"])) {
 
     if ($result = $DB->query($query)) {
         if ($DB->numrows($result) > 0) {
-            $row = $DB->fetch_assoc($result);
+            $row = $result->fetch_assoc();
             $mmail->setFrom($row['email'], $row['firstname'].' '.$row['realname']);
         }
     }
