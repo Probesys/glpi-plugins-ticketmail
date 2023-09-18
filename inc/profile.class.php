@@ -125,7 +125,7 @@ class PluginTicketmailProfile extends CommonDBTM {
                if ($result = $DB->query($query)) {
                    if ($DB->numrows($result) > 0) {
                        $row = $DB->fetchAssoc($result);
-                       $subject = '[GLPI #'.$row['id'].']) '.$row['name'];
+                       $subject = '[GLPI #'.$row['id'].'] '.$row['name'];
                        $body = '<h3>'.__('Content of the initial ticket','ticketmail').'</h3>';
                        $body .= Html::convDateTime($row['date']) . "\n" . $row['content'] . "\n\n";
                    }
