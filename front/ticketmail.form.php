@@ -69,7 +69,8 @@ if (isset($_POST["send"])) {
                 ));
         $changes[0] = 0;
         $changes[1] = $address;
-        $changes[2] = $subject;
+        $changes[2] = $subject.'<br/>'.$body;
+        
         Log::history($_POST['id'], 'Ticket', $changes, 'PluginTicketmailProfile', Log::HISTORY_PLUGIN + 1024);
         Session::addMessageAfterRedirect(sprintf(__('An email was sent to %s'), $address));
     }
