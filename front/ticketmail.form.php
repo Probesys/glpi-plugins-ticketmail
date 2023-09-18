@@ -53,7 +53,7 @@ if (isset($_POST["send"])) {
     $mmail->isHTML(true);
     $mmail->Subject = $subject;
     $mmail->Body = $header.GLPIMailer::normalizeBreaks($body).$footer;
-    $mmail->MessageID = "GLPI-ticketmail".time().".".rand(). "@".php_uname('n');
+    $mmail->MessageID = "GLPI-ticketmail".time().".".rand(). "@".php_uname('n').'-Ticket-'.$_POST['id'];
     
     if (!$mmail->Send()) {
         Session::addMessageAfterRedirect(__("Your email could not be processed.\nIf the problem persists, contact the administrator"), false, ERROR);
