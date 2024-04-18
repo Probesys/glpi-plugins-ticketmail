@@ -176,6 +176,19 @@ class PluginTicketmailProfile extends CommonDBTM {
                    }
                }
 
+               $fromEmails = [$CFG_GLPI["admin_email"]];
+               $queryEmails = "SELECT email, realname, firstname FROM glpi_useremails um
+                LEFT JOIN glpi_users u ON um.users_id=u.id
+                WHERE um.users_id=".$_SESSION['glpiID'];
+
+               if ($result = $DB->query($queryEmails)) {
+                    while ($row = $DB->fetchAssoc($result)) {
+                        $fromEmails[] = $row['email'];
+                    }
+                }
+                array_unique($fromEmails);
+
+
                //Hide textbox for known user
                $onchange = '
 			if (this.value != 0) {
@@ -200,6 +213,19 @@ class PluginTicketmailProfile extends CommonDBTM {
                            <th colspan='2'><?php echo __('Send ticket information by email','ticketmail'); ?></th>
                         </tr>
                         <tr class='tab_bg_1'>
+                        <th><?php echo __('Email sender'); ?> : </th>
+                           <td>
+                               <select name="from" required='true'>
+                                   <?php 
+                                   foreach ($fromEmails as $email) {
+                                     echo '<option value="'.$email.'">'.$email.'</option>';  
+                                   }
+                                   ?>
+                               </select>
+                           </td>
+                        </tr>
+                        <tr class='tab_bg_1'>
+                           
                            <th><?php echo __('To','ticketmail'); ?> : </th>
                            <td>
                             <?php

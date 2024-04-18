@@ -42,16 +42,19 @@ if (isset($_POST["send"])) {
     
     $mmail = new GLPIMailer();
         
-    $query = "SELECT email, realname, firstname FROM glpi_useremails um
-                LEFT JOIN glpi_users u ON um.users_id=u.id
-                WHERE um.users_id=".$_SESSION['glpiID'];
-
-    if ($result = $DB->query($query)) {
-        if ($DB->numrows($result) > 0) {
-            $row = $result->fetch_assoc();
-            $mmail->setFrom($row['email'], $row['firstname'].' '.$row['realname']);
-        }
-    }
+//    $query = "SELECT email, realname, firstname FROM glpi_useremails um
+//                LEFT JOIN glpi_users u ON um.users_id=u.id
+//                WHERE um.users_id=".$_SESSION['glpiID'];
+//
+//    if ($result = $DB->query($query)) {
+//        if ($DB->numrows($result) > 0) {
+//            $row = $result->fetch_assoc();
+//            $mmail->setFrom($row['email'], $row['firstname'].' '.$row['realname']);
+//        }
+//    }
+    
+    $from = $_POST['from'];
+    $mmail->SetFrom($_POST['from'], $_POST['from'], false);
     
     $body = str_replace("\\r", "", str_replace("\\n", "\n", html_entity_decode($_POST['body'])));
     $body = str_replace("\'", "'",$body);
@@ -74,7 +77,7 @@ if (isset($_POST["send"])) {
     $mmail->AddCustomHeader("Auto-Submitted: auto-generated");
     // For exchange
     $mmail->AddCustomHeader("X-Auto-Response-Suppress: OOF, DR, NDR, RN, NRN");
-    $mmail->SetFrom($CFG_GLPI["admin_email"], $CFG_GLPI["admin_email_name"], false);
+    //$mmail->SetFrom($CFG_GLPI["admin_email"], $CFG_GLPI["admin_email_name"], false);
     $subject = $_POST["subject"];
     $mmail->AddAddress($address, $address);
     $mmail->isHTML(true);
