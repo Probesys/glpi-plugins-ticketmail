@@ -84,7 +84,7 @@ if (isset($_POST["send"])) {
     $mmail->Subject = $subject;
     $mmail->Body = $header.GLPIMailer::normalizeBreaks($body).$footer;
     $mmail->MessageID = "GLPI-ticketmail".time().".".rand(). "@".php_uname('n').'-Ticket-'.$_POST['id'];
-    
+       
     if (!$mmail->Send()) {
         Session::addMessageAfterRedirect(__("Your email could not be processed.\nIf the problem persists, contact the administrator"), false, ERROR);
         Toolbox::logInFile("mail", "\nError during send email form ticketMail plugin:\n ** RECIPIANT: ".$address. "\n ** SUBJECT: ".$subject."\n ** BODY: ".$body. "\n ** ERROR: ".$mmail->ErrorInfo);
@@ -102,6 +102,17 @@ if (isset($_POST["send"])) {
         $changes[2] = $subject.'<br/>'.$body;
         
         Log::history($_POST['id'], 'Ticket', $changes, 'PluginTicketmailProfile', Log::HISTORY_PLUGIN + 1024);
+        
+        // Add new TicketTask
+        $task = new TicketTask();
+        $toadd = ["type"        => 'new',
+                "tickets_id"   => $_POST['id'],
+                "actiontime"   => 0,
+                "state"        => Planning::DONE,
+                "content"      => __('Send ticket information by email','ticketmail').' '.__('to').' '.$address
+            ];
+        $task->add($toadd);
+        
         Session::addMessageAfterRedirect(sprintf(__('An email was sent to %s'), $address));
     }
     $mmail->ClearAddresses();
