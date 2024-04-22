@@ -67,6 +67,12 @@
          <compatibility>~10.0</compatibility>
          <download_url>https://github.com/Probesys/glpi-plugins-ticketmail/releases/download/v3.6.4/ticketmail-3.6.4.tbz</download_url>
       </version>
+      
+      <version>
+         <num>3.6.5</num>
+         <compatibility>~10.0</compatibility>
+         <download_url>https://github.com/Probesys/glpi-plugins-ticketmail/releases/download/v3.6.5/ticketmail-3.6.5.tbz</download_url>
+      </version>
    </versions>
    <langs>
       <lang>fr_FR</lang>
