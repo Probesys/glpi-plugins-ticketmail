@@ -168,7 +168,7 @@ class PluginTicketmailProfile extends CommonDBTM {
                            if($row['is_private'] ==  1) {
                                $body .= '<div class="is_private">';
                            }
-                           $body .= Html::convDateTime($row['date']) . ":\n" . $row['content'] . "\n\n";
+                           $body .= '<br/>'.Html::convDateTime($row['date']) . ":\n" . $row['content'] . "\n\n";
                            if($row['is_private'] ==  1) {
                                $body .= '</div>';
                            }

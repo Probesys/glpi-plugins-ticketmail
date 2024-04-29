@@ -112,6 +112,27 @@ if (isset($_POST["send"])) {
                 "content"      => __('Send ticket information by email','ticketmail').' '.__('to').' '.$address
             ];
         $task->add($toadd);
+        // Add Document txt with body content
+        $file = 'ticketmailContent-'.$_POST['id'].'-'.rand().'.txt';
+        file_put_contents($file, $body);
+        rename($file, GLPI_TMP_DIR . "/" .$file);
+        $document = new Document();        
+        $input = [
+            "items_id" => $task->getID(),
+            "itemtype" => 'TicketTask',
+            "_filename" => [$file]
+        ];
+        $input = $document->prepareInputForAdd($input);
+        if($input) {
+            $document->add($input);        
+            // Associate this document to the task
+            $docitem = new Document_Item();
+            $docitem->add(['documents_id' => $document->getID(),
+                'itemtype'     => 'TicketTask',
+                'items_id'     => $task->getID()
+            ]);
+        }
+        
         
         Session::addMessageAfterRedirect(sprintf(__('An email was sent to %s'), $address));
     }
