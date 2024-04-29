@@ -27,7 +27,7 @@
  *  ---------------------------------------------------------------------
  */
 
-define('TICKETMAIL_VERSION', '3.6.5');
+define('TICKETMAIL_VERSION', '3.6.6');
 define('TICKETMAIL_MIN_GLPI_VERSION', '9.4');
 define('TICKETMAIL_MAX_GLPI_VERSION', '11.0');
 if (!defined("PLUGIN_TICKETMAIL_DIR")) {
